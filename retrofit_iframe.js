@@ -1,4 +1,4 @@
-____.$(function($) {
+___.$(function($) {
 
     // Replace the page with an iframe at the same URL
     ___.retrofit = function() {
