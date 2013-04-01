@@ -1,6 +1,7 @@
 ___.$ = $;
 
 ___.$(function($) {
+
     ___.load = function(href) {
         $.ajax({
             url: href,
@@ -11,10 +12,12 @@ ___.$(function($) {
             }
         });
     }
+
     ___.push = function(href) {
         history.pushState({}, '', href);
         ___.load(href);
     };
+
     ___.retrofit = function() {
         $('a').each(function() {
             var $this = $(this);
@@ -27,10 +30,14 @@ ___.$(function($) {
             }
         });
     };
+
     ___.retrofit();
+
     window.onpopstate = function(event) {
         ___.load(window.location.href);
     }
+
+    ___.include('http://www.cse.unsw.edu.au/~lukegt/___/commands.js');
 });
 
 $.noConflict(true);

@@ -1,3 +1,5 @@
+___.$ = $;
+
 ___.$(function($) {
 
     // Replace the page with an iframe at the same URL
@@ -38,4 +40,8 @@ ___.$(function($) {
         // cross-document messaging muckabout
         window.parent.postMessage('Waddup, cunt', 'sick one');
     }
+
+    ___.include('http://www.cse.unsw.edu.au/~lukegt/___/commands.js');
 });
+
+___.$.noConflict(true);
