@@ -10,4 +10,4 @@ ___.$(function($) {
             console.log("performing task: ", event.payload);
         });
     }
-}
+});
