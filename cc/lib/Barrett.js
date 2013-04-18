@@ -72,8 +72,6 @@ function BarrettMu_powMod(x, y)
 	return result;
 }
 
-console.log(this);
-
 global.BarrettMu = BarrettMu;
 global.BarrettMu_modulo = BarrettMu_modulo;
 global.BarrettMu_multiplyMod = BarrettMu_multiplyMod;

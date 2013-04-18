@@ -4,10 +4,12 @@
  */
 
 var express = require('express')
-  , queue = require('./routes/queue')
-  , results = require('./routes/results')
   , http = require('http')
   , path = require('path');
+
+require("./lib/Barrett");
+require("./lib/BigInt");
+require("./lib/RSA");
 
 var app = express();
 
