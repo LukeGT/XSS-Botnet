@@ -91,14 +91,17 @@ app.get('/push', function(req, res){
 });
 
 app.get('/pullkey', function(req, res){
-    pullKey = encryptedString(serverKey, getKey());
-    res.send({ key: pullKey });
+    pullKey = getKey();
+    res.send({ key: encryptedString(serverKey, pullKey) });
 });
 
 app.get('/pull', function(req, res){
 
-    if (decryptedString(serverKey, req.query.key) == pullKey) {
+    console.log(pullKey);
 
+    if (pullKey != null && req.query.key == pullKey) {
+
+        pullKey = null;
         res.send( encryptedString(serverKey, JSON.stringify(results)) );
 
         for (var key in results) {

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 require("./lib/Barrett");
 require("./lib/BigInt");
 require("./lib/RSA");
@@ -19,5 +21,9 @@ process.stdin.on('data', function(chunk) {
 });
 
 process.stdin.on('end', function() {
-    console.log(encryptedString(hackerKey, data));
+    if (process.argv[2][0] == 'e') {
+        console.log("\n", encryptedString(hackerKey, data));
+    } else {
+        console.log("\n", decryptedString(hackerKey, data));
+    }
 });
