@@ -1,4 +1,5 @@
 
+
 /**
  * Module dependencies.
  */
@@ -27,20 +28,11 @@ if ('development' == app.get('env')) {
 }
 
 setMaxDigits(19);
-// key 1: "5dd5ad3ab3e3eb5409c0ead832b7a21d"
-// key 2: "bf79e379f1535ddf1de7571f65b04b5"
-var hackerKey = new RSAKeyPair(
- "5dd5ad3ab3e3eb5409c0ead832b7a21d",
- "5dd5ad3ab3e3eb5409c0ead832b7a21d",
- "907e4e9bdca8832febfa32d958dee42d"
-);
 var serverKey = new RSAKeyPair(
  "bf79e379f1535ddf1de7571f65b04b5",
  "bf79e379f1535ddf1de7571f65b04b5",
  "907e4e9bdca8832febfa32d958dee42d"
 );
-
-console.log(encryptedString(hackerKey, 'function(callback){callback("yeah!")}'));
 
 // Storage
 var queue = [];
