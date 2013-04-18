@@ -24,11 +24,21 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/queue', queue.get);
-app.post('/queue', queue.post);
+app.get('/queue', function(req, res){
+    res.send("get queue");
+});
 
-app.get('/results', results.get);
-app.post('/results', results.post);
+app.post('/queue', function(req, res){
+    res.send("post queue");
+});
+
+app.get('/results', function(req, res){
+    res.send("get results");
+});
+
+app.post('/results', function(req, res){
+    res.send("post results");
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
