@@ -1,0 +1,1 @@
+exports.imageToURL = (image) -> escape(image).replace /\//g, '%2F'

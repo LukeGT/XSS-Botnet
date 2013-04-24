@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div.jumbotron
+    h1 Link the Happi Foto!
+  hr
+  form(method='POST')
+    div.input-append
+      input.input-xxlarge(name='link', type='text', placeholder='Paste the link!', autofocus='true')
+      button.btn(type='submit') Link Happi Foto!
+  hr

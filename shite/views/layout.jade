@@ -1,0 +1,23 @@
+doctype 5
+
+menuItems = { Home: '/', Browse: '/browse', Link: '/link' }
+
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div.container
+      div.masthead
+        h3.muted Happi Foto!
+        div.navbar
+          div.navbar-inner
+            div.container
+              ul.nav
+                each link, title in menuItems
+                  if title == active
+                    li.active: a(href=link)= title
+                  else
+                    li: a(href=link)= title
+      block content

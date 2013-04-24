@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div.jumbotron
+    h1 Look all the Happi Foto!
+  hr
+  ul.fotos
+    for foto in fotos
+      li
+        a(href=foto.url)
+          div.img(style='background-image:url(#{foto.image})')
+  hr

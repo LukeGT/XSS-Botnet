@@ -1,0 +1,4 @@
+*.js
+public/stylesheets/*.css
+*.map
+data

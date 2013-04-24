@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  div.jumbotron
+    h1 Talk Happi Foto!
+  hr
+  div.img-container
+    img(src=image)
+  hr
+  form(method='POST')
+    div.input-append
+      input.input-xxlarge(name='talk', type='text', placeholder='Make the talk!', autofocus='true')
+      button.btn(type='submit') Talk Happi Foto!
+  hr
+  ul.talks
+    each talk in talks
+      li
+        p= talk
