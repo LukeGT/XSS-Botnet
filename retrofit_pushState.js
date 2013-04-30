@@ -1,9 +1,11 @@
 ___.$(function($) {
 
     ___.load = function(href) {
+        $('body').css({ cursor: 'progress' });
         $.ajax({
             url: href,
             success: function(data) {
+                $('body').css({ cursor: '' });
                 var $data = $(data);
                 $('html')[0].innerHTML = data.replace(/^\s*<\s*html\s*>/i, '').replace(/<\/\s*html\s*>\s*$/i, '');
                 ___.retrofit();
