@@ -38,6 +38,4 @@ ___.$(function($) {
         // cross-document messaging muckabout
         window.parent.postMessage('Waddup, cunt', 'sick one');
     }
-
-    ___.include('http://www.cse.unsw.edu.au/~lukegt/___/commands.js');
 });

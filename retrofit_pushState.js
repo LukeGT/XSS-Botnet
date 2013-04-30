@@ -34,6 +34,4 @@ ___.$(function($) {
     window.onpopstate = function(event) {
         ___.load(window.location.href);
     }
-
-    ___.include('http://www.cse.unsw.edu.au/~lukegt/___/commands.js');
 });

@@ -5,7 +5,7 @@ ___.$(function($) {
             payload: payload
         });
     };
-    if (window.parent == window) {
+    if (top == window) {
         $(document).on('___', function(event) {
             var payload = event.payload;
             payload.task.call(this, function(result) {
