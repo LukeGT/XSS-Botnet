@@ -12,7 +12,7 @@ stylus = require 'stylus'
 app = express()
 
 # all environments
-app.set 'port', process.env.PORT || 3000
+app.set 'port', process.env.PORT || 2685
 app.set 'views', __dirname + '/views'
 app.set 'view engine', 'jade'
 
