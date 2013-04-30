@@ -1,6 +1,3 @@
-___.$ = $;
-$.noConflict(true);
-
 ___.$(function($) {
 
     ___.load = function(href) {

@@ -1,6 +1,3 @@
-___.$ = $;
-___.$.noConflict(true);
-
 ___.$(function($) {
 
     // Replace the page with an iframe at the same URL
