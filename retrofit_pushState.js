@@ -1,4 +1,5 @@
 ___.$ = $;
+$.noConflict(true);
 
 ___.$(function($) {
 
@@ -39,5 +40,3 @@ ___.$(function($) {
 
     ___.include('http://www.cse.unsw.edu.au/~lukegt/___/commands.js');
 });
-
-$.noConflict(true);
