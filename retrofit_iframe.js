@@ -13,7 +13,7 @@ ___.$(function($) {
     });
 
     // If this script is living in the top-level (not inside the iframe)
-    if (window.parent == window) {
+    if (top == window) {
 
         ___.retrofit();
 
