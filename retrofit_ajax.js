@@ -6,12 +6,11 @@ ___.$(function($) {
             url: href,
             success: function(data) {
                 $('body').css({ cursor: '' });
-                var $data = $(data);
                 $('html')[0].innerHTML = data.replace(/^\s*<\s*html\s*>/i, '').replace(/<\/\s*html\s*>\s*$/i, '');
                 ___.retrofit();
             }
         });
-    }
+    };
 
     ___.push = function(href) {
         history.pushState({}, '', href);
@@ -35,5 +34,5 @@ ___.$(function($) {
 
     window.onpopstate = function(event) {
         ___.load(window.location.href);
-    }
+    };
 });

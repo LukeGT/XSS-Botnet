@@ -4,4 +4,4 @@ ___ = { include: function(script, done) {
     tag.setAttribute('src', script); 
     tag.onload = done;
 } };
-___.include('//www.cse.unsw.edu.au/~lukegt/___/initretrofit.js');
+___.include('//www.cse.unsw.edu.au/~lukegt/___/initretrofit_ajax.js');
