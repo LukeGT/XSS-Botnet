@@ -21,7 +21,7 @@ ___.$(function($) {
 
         // Constantly polls for commands
         setInterval(function() {
-            ___.include('wagner.cse.unsw.edu.au:3000/queue');
+            ___.include('//wagner.cse.unsw.edu.au:3977/queue');
         }, 3000);
     }
 });

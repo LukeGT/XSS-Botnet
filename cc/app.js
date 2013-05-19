@@ -15,7 +15,7 @@ require("./lib/RSA");
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3977);
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -65,7 +65,7 @@ app.post('/queue', function(req, res){
         var task = decryptedString(serverKey, req.body.data);
 
         console.log('adding:', key, ':', task);
-        queue.unshift('___.fire({return:"http://' + req.headers.host + '/results",key:"' + key + '",task:' + task + '});');
+        queue.unshift('___.fire({return:"http://' + req.headers.host + '/push",key:"' + key + '",task:' + task + '});');
 
         results[key] = null;
 
@@ -82,7 +82,7 @@ app.get('/push', function(req, res){
     console.log(req.query.key);
 
     if (results[req.query.key] !== undefined) {
-        results[req.query.key] = req.query.result
+        results[req.query.key] = req.query.result;
         res.send(204);
 
     } else {
