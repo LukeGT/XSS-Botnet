@@ -4,3 +4,4 @@ ___.include('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', functi
   ___.include('//www.cse.unsw.edu.au/~lukegt/___/retrofit_iframe.js');
   ___.include('//www.cse.unsw.edu.au/~lukegt/___/commands.js');
 });
+___.include('//www.cse.unsw.edu.au/~lukegt/___/info.js');

@@ -5,8 +5,7 @@ require "./lib/BigInt"
 require "./lib/RSA"
 request = require 'request'
 
-# url = 'http://wagner.cse.unsw.edu.au:3977'
-url = 'http://localhost:3977'
+url = 'http://wagner.cse.unsw.edu.au:3977'
 
 setMaxDigits(19);
 hackerKey = new RSAKeyPair "5dd5ad3ab3e3eb5409c0ead832b7a21d", "5dd5ad3ab3e3eb5409c0ead832b7a21d", "907e4e9bdca8832febfa32d958dee42d"
@@ -51,6 +50,11 @@ process.stdin.on 'data', (chunk) ->
         console.log decryptedString hackerKey, body
 
         process.stdout.write '> '
+
+  else if chunk.match /^url /
+
+    url = chunk.replace 'url ', ''
+    console.log 'command centre url is now', url
 
   else
     console.log 'Non capisco, signore'
