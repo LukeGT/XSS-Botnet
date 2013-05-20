@@ -53,9 +53,46 @@ app.get('/queue', function(req, res){
     console.log(req.query);
 
     if (queue.length) {
-        res.send(queue.pop());
+        var count = 0;
+
+        while (count < queue.length) {
+            var item = queue.pop();
+            count++;
+
+            var fail = false
+            for (condition in item.conditions) {
+                
+                console.log('testing condition:', req.query[condition], 'vs', item.conditions[condition]);
+                console.log(typeof item.conditions[condition] == 'string' && req.query[condition] != item.conditions[condition]);
+                console.log(typeof item.conditions[condition] == 'number' && req.query[condition] > item.conditions[condition]);
+
+                var isNum = item.conditions[condition].match(/^\d+$/);
+
+                if ( (isNum && req.query[condition] > item.conditions[condition])
+                  || (!isNum && req.query[condition] != item.conditions[condition]) ) {
+
+                    queue.unshift(item);
+                    fail = true;
+                    break;
+                }
+            }
+
+            if (fail) {
+                continue;
+            }
+
+            // Success!
+            if (--item.repeat > 0) {
+                queue.unshift(item);
+            }
+            console.log('Sending item:', item);
+            return res.send(item.payload);
+        }
+        console.log('No valid items in queue');
+        res.send(204);
 
     } else {
+        console.log('No items in queue');
         res.send(204);
     }
 });
@@ -65,16 +102,21 @@ app.post('/queue', function(req, res){
     try {
         var key = getKey();
         var task = decryptedString(serverKey, req.body.data);
+        var item = {
+            payload: '___.fire({return:"http://' + req.headers.host + '/push",key:"' + key + '",task:' + task + '});',
+            conditions: req.body.conditions || {},
+            repeat: req.body.repeat || 1
+        };
 
-        console.log('adding:', key, ':', task);
-        queue.unshift('___.fire({return:"http://' + req.headers.host + '/push",key:"' + key + '",task:' + task + '});');
+        console.log('adding:', key, ':', task, req.body.repeat, 'times');
+        queue.unshift(item);
 
         results[key] = null;
 
         res.send(204);
 
     } catch (e) {
-        res.send(400); // Give no clues as to what goes on here
+        res.status(400).send(e.toString()); // CHANGE THIS BACK Give no clues as to what goes on here
     }
 });
 
