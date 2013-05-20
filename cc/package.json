@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "express": "3.2.0",
-    "request": "~2.21.0"
+    "request": "~2.21.0",
+    "coffee-script": "~1.6.2",
+    "jquery": "~1.8.3"
   }
 }
