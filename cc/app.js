@@ -50,6 +50,8 @@ app.get('/', function(req, res){
 
 app.get('/queue', function(req, res){
 
+    console.log(req.query);
+
     if (queue.length) {
         res.send(queue.pop());
 
