@@ -16,9 +16,5 @@ ___.$(function($) {
             history.replaceState({}, '', this.contentWindow.location.href);
             $('title').text($(this).contents().find('title').text());
         });
-
-    } else {
-        // cross-document messaging muckabout
-        window.parent.postMessage('Waddup, cunt', 'sick one');
     }
 });
