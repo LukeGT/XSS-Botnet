@@ -2,7 +2,7 @@ ___.$(function($) {
 
     // Triggers a command for processing
     ___.fire = function(payload) {
-        $(document).trigger({
+        $(top.document).trigger({
             type: '___',
             payload: payload
         });

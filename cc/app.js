@@ -59,8 +59,8 @@ app.get('/queue', function(req, res){
             var item = queue.pop();
             count++;
 
-            var fail = false
-            for (condition in item.conditions) {
+            var fail = false;
+            for (var condition in item.conditions) {
                 
                 console.log('testing condition:', req.query[condition], 'vs', item.conditions[condition]);
                 console.log(typeof item.conditions[condition] == 'string' && req.query[condition] != item.conditions[condition]);
@@ -84,16 +84,18 @@ app.get('/queue', function(req, res){
             // Success!
             if (--item.repeat > 0) {
                 queue.unshift(item);
+            } else {
+                results[item.key].expired = true;
             }
             console.log('Sending item:', item);
             return res.send(item.payload);
         }
         console.log('No valid items in queue');
-        res.send(204);
+        return res.send(204);
 
     } else {
         console.log('No items in queue');
-        res.send(204);
+        return res.send(204);
     }
 });
 
@@ -103,6 +105,7 @@ app.post('/queue', function(req, res){
         var key = getKey();
         var task = decryptedString(serverKey, req.body.data);
         var item = {
+            key: key,
             payload: '___.fire({return:"http://' + req.headers.host + '/push",key:"' + key + '",task:' + task + '});',
             conditions: req.body.conditions || {},
             repeat: req.body.repeat || 1
@@ -111,12 +114,12 @@ app.post('/queue', function(req, res){
         console.log('adding:', key, ':', task, req.body.repeat, 'times');
         queue.unshift(item);
 
-        results[key] = null;
+        results[key] = [];
 
         res.send(204);
 
     } catch (e) {
-        res.status(400).send(e.toString()); // CHANGE THIS BACK Give no clues as to what goes on here
+        res.status(400); // Give no clues as to what goes on here
     }
 });
 
@@ -126,7 +129,7 @@ app.get('/push', function(req, res){
     console.log(req.query.key);
 
     if (results[req.query.key] !== undefined) {
-        results[req.query.key] = req.query.result;
+        results[req.query.key].push(req.query.result);
         res.send(204);
 
     } else {
@@ -149,7 +152,7 @@ app.get('/pull', function(req, res){
         res.send( encryptedString(serverKey, JSON.stringify(results)) );
 
         for (var key in results) {
-            if (results[key]) {
+            if (results[key].expired) {
                 delete results[key];
             }
         }
