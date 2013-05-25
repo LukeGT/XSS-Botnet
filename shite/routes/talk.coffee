@@ -1,6 +1,9 @@
 fs = require 'fs'
 util = require '../util'
 
+validateTalk = (talk) ->
+  talk.replace /<(?!img)/gi, '&lt;'
+
 exports.get = (req, res) ->
 
   talkFile = 'data/talk/' + util.imageToURL req.params.image
@@ -22,7 +25,7 @@ exports.get = (req, res) ->
           console.error
         else
           for talk in data.toString().split '\n' when talk.length
-            talks.push talk
+            talks.push validateTalk talk
 
         render()
 
