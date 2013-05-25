@@ -22,10 +22,11 @@ ___.$(function($) {
             var $this = $(this);
             var href = $this.attr('href');
             if (href) {
-                if (href.match(/^http/)) {
-                    return;
+                if (href.match(/^(https?:)?\/\//)) {
+                    $this.attr('target', '_blank');
+                } else {
+                    $this.attr('href', "javascript:___.push('" + href + "')");
                 }
-                $this.attr('href', "javascript:___.push('" + href + "')");
             }
         });
     };
