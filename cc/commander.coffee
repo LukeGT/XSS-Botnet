@@ -43,7 +43,7 @@ global.queue = (args...) ->
       console.log "error occurred:", response.statusCode, error, response.body
       promise.reject()
     else
-      console.log "great success"
+      console.log "job key:", body
       promise.resolve()
 
   return promise

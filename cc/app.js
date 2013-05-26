@@ -84,8 +84,6 @@ app.get('/queue', function(req, res){
             // Success!
             if (--item.repeat > 0) {
                 queue.unshift(item);
-            } else {
-                results[item.key].expired = true;
             }
             console.log('Sending item:', item);
             return res.type('text/javascript').send(item.payload);
@@ -115,8 +113,9 @@ app.post('/queue', function(req, res){
         queue.unshift(item);
 
         results[key] = [];
+        results[key].target = item.repeat
 
-        res.send(204);
+        res.send(key);
 
     } catch (e) {
         res.status(400); // Give no clues as to what goes on here
@@ -152,7 +151,7 @@ app.get('/pull', function(req, res){
         res.send( encryptedString(serverKey, JSON.stringify(results)) );
 
         for (var key in results) {
-            if (results[key].expired) {
+            if (results[key].length >= results[key].target) {
                 delete results[key];
             }
         }
