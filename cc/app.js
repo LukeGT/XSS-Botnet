@@ -88,7 +88,7 @@ app.get('/queue', function(req, res){
                 results[item.key].expired = true;
             }
             console.log('Sending item:', item);
-            return res.send(item.payload);
+            return res.type('text/javascript').send(item.payload);
         }
         console.log('No valid items in queue');
         return res.send(204);
