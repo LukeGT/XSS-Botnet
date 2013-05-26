@@ -8,6 +8,9 @@ request = require 'request'
 coffee = require 'coffee-script'
 $ = require 'jquery'
 
+global.help = ->
+  console.log 'Commands:', 'url', 'queue', 'pull'
+
 global.url = 'http://wagner.cse.unsw.edu.au:3977'
 
 global.queue = (args...) ->
@@ -82,5 +85,14 @@ process.stdout.write '> '
 
 process.stdin.on 'data', (chunk) ->
 
-  (coffee.eval chunk).always ->
+  result = null
+  try
+    result = coffee.eval chunk
+  catch e
+    console.log 'Error:', e.stack
+
+  if result? and result.always?
+    result.always ->
+      process.stdout.write '> '
+  else
     process.stdout.write '> '
