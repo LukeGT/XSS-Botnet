@@ -14,7 +14,17 @@ ___.$(function($) {
 
         $('iframe').on('load', function() {
             history.replaceState({}, '', this.contentWindow.location.href);
-            $('title').text($(this).contents().find('title').text());
+            var $iframe = $(this).contents();
+            $('title').text($iframe.find('title').text());
+            $iframe.find('a').each(function() {
+                var $this = $(this);
+                var href = $this.attr('href');
+                if (href) {
+                    if (href.match(/^(https?:)?\/\//)) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            });
         });
     }
 });
