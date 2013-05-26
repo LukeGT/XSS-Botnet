@@ -65,7 +65,7 @@ app.get('/queue', function(req, res){
                 var truth = {
                     string: req.query[condition] == item.conditions[condition],
                     number: (req.query[condition] - 0) <= item.conditions[condition],
-                    boolean: (!!req.query[condition]) === item.conditions[condition]
+                    boolean: (req.query[condition] == 'true') === item.conditions[condition]
                 }[ typeof item.conditions[condition] ];
 
                 if (!truth) {
