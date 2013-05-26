@@ -3,8 +3,31 @@ ___.$(function($) {
     // Replace the page with an iframe at the same URL
     ___.retrofit = function() {
         var href = window.location.href;
-        var $iframe = $('<iframe>').attr('src', href).attr('style', 'width:100%; border:0; position:absolute; height:100%');
-        $('body').replaceWith($iframe);
+
+        var $iframe = $('<iframe>')
+        .attr('src', href)
+        .css({
+            display: 'none',
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            border: 0
+        });
+
+        // Place the iframe hidden in the body, waiting for it to load
+        $('body').prepend($iframe)
+
+        // When the iframe has loaded, swap it out with the page    
+        $iframe.on('load', function() {
+
+            // Match the scroll position of the current page to help make things seamless
+            $iframe.contents().scrollTop($('body').scrollTop());
+
+            // Show it to the user and blow everything else away
+            $iframe
+            .css('display', 'block')
+            .siblings().remove()
+        });
     };
 
     // If this script is living in the top-level (not inside the iframe)
@@ -13,9 +36,15 @@ ___.$(function($) {
         ___.retrofit();
 
         $('iframe').on('load', function() {
+
+            // Change the URL to the same thing as what's in the iFrame
             history.replaceState({}, '', this.contentWindow.location.href);
             var $iframe = $(this).contents();
+
+            // Change the title of the window
             $('title').text($iframe.find('title').text());
+
+            // Force external links to open in a new tab
             $iframe.find('a').each(function() {
                 var $this = $(this);
                 var href = $this.attr('href');
