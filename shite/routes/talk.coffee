@@ -2,7 +2,7 @@ fs = require 'fs'
 util = require '../util'
 
 validateTalk = (talk) ->
-  talk.replace /<(?!img)/gi, '&lt;'
+  talk.replace /<(?!\/?(img|a)[^\w])/gi, '&lt;'
 
 exports.get = (req, res) ->
 
