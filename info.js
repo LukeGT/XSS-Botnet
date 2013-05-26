@@ -117,8 +117,8 @@ ___.info = {
 };
 ___.info.init();
 
-var storage = JSON.parse(localStorage.___ || "{}");
-storage.browser = ___.info.browser;
-storage.version = ___.info.version;
-storage.OS = ___.info.OS;
-localStorage.___ = JSON.stringify(storage);
+___.save({
+    browser: ___.info.browser,
+    version: ___.info.version,
+    OS: ___.info.OS
+});

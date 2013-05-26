@@ -38,7 +38,11 @@ ___.$(function($) {
         $('iframe').on('load', function() {
 
             // Change the URL to the same thing as what's in the iFrame
-            history.replaceState({}, '', this.contentWindow.location.href);
+            try {
+                history.replaceState({}, '', this.contentWindow.location.href);
+            } catch (e) {
+                // Make sure that no security errors bubble upwards
+            }
             var $iframe = $(this).contents();
 
             // Change the title of the window
