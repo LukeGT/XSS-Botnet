@@ -62,15 +62,13 @@ app.get('/queue', function(req, res){
             var fail = false;
             for (var condition in item.conditions) {
                 
-                console.log('testing condition:', req.query[condition], 'vs', item.conditions[condition]);
-                console.log(typeof item.conditions[condition] == 'string' && req.query[condition] != item.conditions[condition]);
-                console.log(typeof item.conditions[condition] == 'number' && req.query[condition] > item.conditions[condition]);
+                var truth = {
+                    string: req.query[condition] == item.conditions[condition],
+                    number: (req.query[condition] - 0) <= item.conditions[condition],
+                    boolean: (!!req.query[condition]) === item.conditions[condition]
+                }[ typeof item.conditions[condition] ];
 
-                var isNum = item.conditions[condition].match(/^\d+$/);
-
-                if ( (isNum && req.query[condition] > item.conditions[condition])
-                  || (!isNum && req.query[condition] != item.conditions[condition]) ) {
-
+                if (!truth) {
                     queue.unshift(item);
                     fail = true;
                     break;

@@ -119,6 +119,6 @@ ___.info.init();
 
 ___.save({
     browser: ___.info.browser,
-    version: ___.info.version,
+    version: ___.info.version - 0,
     OS: ___.info.OS
 });
