@@ -1,4 +1,5 @@
 // Copy pasta'd from http://www.quirksmode.org/js/detect.html
+// This is a really shit script, but I cbf making my own
 ___.info = {
     init: function () {
         this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
@@ -117,6 +118,7 @@ ___.info = {
 };
 ___.info.init();
 
+// Record the browser version and operating system
 ___.save({
     browser: ___.info.browser,
     version: ___.info.version - 0,

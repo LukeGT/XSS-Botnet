@@ -1,7 +1,10 @@
+// retrofit the page using AJAX instead of reguar page loads
 ___.$(function($) {
 
+    // This activates the progress cursor on all items on the page
     var $css = $('<style>').text('* { cursor: progress !important }');
 
+    // Perform an AJAX request, imitating the progress cursor
     ___.ajax = function(settings) {
         $('head').append($css);
         $.extend(settings, {
@@ -13,11 +16,13 @@ ___.$(function($) {
         $.ajax(settings);
     };
 
+    // Inject a page with raw HTML
     ___.injectPage = function(html) {
         $('html')[0].innerHTML = html.replace(/^\s*<\s*html\s*>/i, '').replace(/<\/\s*html\s*>\s*$/i, '');
         ___.retrofit();
     };
 
+    // Visit a new URL, and perform all necessary magic to make it look legit
     ___.push = function(href) {
         history.pushState({}, '', href);
         ___.ajax({
@@ -25,6 +30,7 @@ ___.$(function($) {
         });
     };
 
+    // Fit the new page out with hax
     ___.retrofit = function() {
 
         // Wire each link up to our ___.push function instead, which will retrieve the page via ajax
@@ -58,6 +64,7 @@ ___.$(function($) {
 
     ___.retrofit();
 
+    // Handle Back/Forward buttons
     window.onpopstate = function(event) {
         ___.ajax(window.location.href);
     };

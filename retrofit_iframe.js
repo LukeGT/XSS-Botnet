@@ -1,3 +1,4 @@
+// Wrap the web page in an IFrame to persist across page loads
 ___.$(function($) {
 
     // Replace the page with an iframe at the same URL

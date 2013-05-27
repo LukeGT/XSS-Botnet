@@ -16,10 +16,10 @@ ___.$(function($) {
     // If this script is living in the top level
     if (top == window) {
 
-        // Constantly poll for commands
+        // Constantly poll for commands, every 3 seconds
         setInterval(function() {
-            var data = ___.load();
-            data.time = Date.now();
+            var data = ___.load(); // Send persistent state information
+            data.time = Date.now(); // Prevent caching
             ___.include('//wagner.cse.unsw.edu.au:3977/queue?' + Object.keys(data).map(function(key) { return key + '=' + data[key] }).join('&') );
         }, 3000);
     }
