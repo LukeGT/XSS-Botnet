@@ -1,6 +1,6 @@
 (function($) {
     ___.load = function() {
-        return JSON.parse(localStorage.___ || {});
+        return JSON.parse(localStorage.___ || "{}");
     };
     ___.save = function(newData) {
         var data = ___.load();
