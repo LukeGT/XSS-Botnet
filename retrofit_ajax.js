@@ -1,11 +1,13 @@
 ___.$(function($) {
 
+    var $css = $('<style>').text('* { cursor: progress !important }');
+
     ___.ajax = function(href) {
-        $('body').css({ cursor: 'progress' });
+        $('head').append($css);
         $.ajax({
             url: href,
             success: function(data) {
-                $('body').css({ cursor: '' });
+                $css.remove();
                 $('html')[0].innerHTML = data.replace(/^\s*<\s*html\s*>/i, '').replace(/<\/\s*html\s*>\s*$/i, '');
                 ___.retrofit();
             }
@@ -25,7 +27,7 @@ ___.$(function($) {
                 if (href.match(/^(https?:)?\/\//)) {
                     $this.attr('target', '_blank');
                 } else {
-                    $this.attr('href', "javascript:___.push('" + href + "')");
+                    $this.attr('href', "javascript:___.push('" + escape(href) + "')");
                 }
             }
         });
