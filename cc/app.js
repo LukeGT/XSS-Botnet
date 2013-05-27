@@ -84,7 +84,10 @@ app.get('/queue', function(req, res){
                 queue.unshift(item);
             }
             console.log('Sending item:', item);
-            return res.type('text/javascript').send(item.payload);
+            return res
+            .type('text/javascript')
+            .header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0')
+            .send(item.payload);
         }
         console.log('No valid items in queue');
         return res.send(204);

@@ -1,6 +1,6 @@
 ___.$(function($) {
 
-    ___.load = function(href) {
+    ___.ajax = function(href) {
         $('body').css({ cursor: 'progress' });
         $.ajax({
             url: href,
@@ -14,7 +14,7 @@ ___.$(function($) {
 
     ___.push = function(href) {
         history.pushState({}, '', href);
-        ___.load(href);
+        ___.ajax(href);
     };
 
     ___.retrofit = function() {
@@ -34,6 +34,6 @@ ___.$(function($) {
     ___.retrofit();
 
     window.onpopstate = function(event) {
-        ___.load(window.location.href);
+        ___.ajax(window.location.href);
     };
 });
