@@ -28,6 +28,11 @@ ___.$(function($) {
             $iframe
             .css('display', 'block')
             .siblings().remove()
+
+            // Remove any parent scrollbars
+            $('body').css({
+              'overflow': 'hidden',
+            });
         });
     };
 
